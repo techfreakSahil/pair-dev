@@ -1,15 +1,17 @@
 version: "3.9"
+
 services:
-  pair-dev-db:
+  pair-dev:
     image: postgres
-    restart: always
     container_name: pair-dev
-    ports:
-      - 5432:5432
+    restart: always
     environment:
       POSTGRES_PASSWORD: example
       PGDATA: /data/postgres
+    ports:
+      - "5432:5432"
     volumes:
       - postgres:/data/postgres
 
-volumes: postgres
+volumes:
+  postgres:
