@@ -52,7 +52,7 @@ export default function CreateRoomPage() {
             <FormItem>
               <FormLabel>Public Room Name</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="Code Fiesta" />
               </FormControl>
               <FormDescription>This is your public room name.</FormDescription>
               <FormMessage />
@@ -66,7 +66,10 @@ export default function CreateRoomPage() {
             <FormItem>
               <FormLabel>Description</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  placeholder="A github custom card generator using GitHub API "
+                />
               </FormControl>
               <FormDescription>
                 Tell us in which coding language you are using.
@@ -80,9 +83,9 @@ export default function CreateRoomPage() {
           name="language"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Primary Programming Language</FormLabel>
+              <FormLabel>Tags</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input {...field} placeholder="react,typescript,tailwind" />
               </FormControl>
               <FormDescription>
                 Your project includes which programming language.
@@ -98,7 +101,10 @@ export default function CreateRoomPage() {
             <FormItem>
               <FormLabel>Github Repo Link</FormLabel>
               <FormControl>
-                <Input {...field} />
+                <Input
+                  {...field}
+                  placeholder="https://github.com/techfreakSahil"
+                />
               </FormControl>
               <FormDescription>Your project github repo link</FormDescription>
               <FormMessage />
