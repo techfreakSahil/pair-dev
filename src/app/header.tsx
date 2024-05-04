@@ -56,7 +56,7 @@ export function Header() {
         <Link href="/">LOGO</Link>
         <nav>
           <Button asChild>
-            <Link href="/your-room">Your Rooms</Link>
+            <Link href="/your-rooms">Your Rooms</Link>
           </Button>
         </nav>
         <div className="flex items-center gap-4">

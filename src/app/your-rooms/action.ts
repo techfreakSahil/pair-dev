@@ -16,5 +16,5 @@ export async function deleteRoomAction(roomId: string) {
     throw new Error("User not authorized");
   }
   await deleteRoom(roomId);
-  revalidatePath("/your-room");
+  revalidatePath("/your-rooms");
 }
