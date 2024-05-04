@@ -54,6 +54,11 @@ export function Header() {
     <header className="py-3 bg-gray-200 container mx-auto dark:bg-gray-900">
       <div className="flex justify-between items-center">
         <Link href="/">LOGO</Link>
+        <nav>
+          <Button asChild>
+            <Link href="/your-room">Your Rooms</Link>
+          </Button>
+        </nav>
         <div className="flex items-center gap-4">
           {session.data && <AccountInfo />}
           {!session.data && (
