@@ -13,6 +13,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { LogOutIcon, SearchIcon } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect } from "react";
 
 const formSchema = z.object({
   search: z.string().min(0).max(50),
@@ -26,6 +27,9 @@ export function Searchbar() {
       search: query.get("search") ?? "",
     },
   });
+  useEffect(() => {
+    form.setValue("search", query.get("search") ?? "");
+  }, [query.get("search"), form]);
   async function onSubmit(values: z.infer<typeof formSchema>) {
     if (values.search) router.push(`/search?=${values.search}`);
     else router.push("/");

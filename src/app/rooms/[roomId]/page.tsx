@@ -2,8 +2,9 @@ import { getRoom } from "@/services/room";
 import { GithubIcon } from "lucide-react";
 
 import Link from "next/link";
-import { TagList, splitTags } from "@/components/tags-list";
+import { TagList } from "@/components/tags-list";
 import { PairDev } from "./video-player";
+import { splitTags } from "@/lib/utils";
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
   const roomId = props.params.roomId;
