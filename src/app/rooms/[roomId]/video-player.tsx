@@ -3,6 +3,7 @@ import { Room } from "@/db/schema";
 import {
   Call,
   CallControls,
+  CallParticipantsList,
   SpeakerLayout,
   StreamCall,
   StreamTheme,
@@ -14,6 +15,8 @@ import "@stream-io/video-react-sdk/dist/css/styles.css";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { generateTokenAction } from "./action";
+import { useRouter } from "next/navigation";
+import { error } from "console";
 
 const apiKey = process.env.NEXT_STREAM_API_KEY!;
 const userId = "user-id";
@@ -21,6 +24,7 @@ const token = "authentication-token";
 
 export function PairDev({ room }: { room: Room }) {
   const session = useSession();
+  const router = useRouter();
   if (!session.data) return;
   const userId = session.data.user.id;
   const [client, setClient] = useState<StreamVideoClient | null>(null);
@@ -32,6 +36,8 @@ export function PairDev({ room }: { room: Room }) {
       apiKey,
       user: {
         id: userId,
+        name: session.data.user.name ?? undefined,
+        image: session.data.user.image ?? undefined,
       },
       tokenProvider: () => generateTokenAction(),
     });
@@ -42,8 +48,12 @@ export function PairDev({ room }: { room: Room }) {
     setCall(call);
 
     return () => {
-      call.leave();
-      client.disconnectUser();
+      call
+        .leave()
+        .then(() => {
+          client.disconnectUser();
+        })
+        .catch(() => console.log(error));
     };
   }, [session, room]);
 
@@ -54,7 +64,8 @@ export function PairDev({ room }: { room: Room }) {
         <StreamTheme>
           <StreamCall call={call}>
             <SpeakerLayout />
-            <CallControls />
+            <CallControls onLeave={() => router.push("/")} />
+            <CallParticipantsList onClose={() => undefined} />
           </StreamCall>
         </StreamTheme>
       </StreamVideo>

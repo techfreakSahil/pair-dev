@@ -21,7 +21,7 @@ import { createRoomAction } from "./actions";
 const formSchema = z.object({
   name: z.string().min(1).max(50),
   description: z.string().min(1).max(1000),
-  language: z.string().min(1).max(50),
+  tags: z.string().min(1).max(50),
   githubRepo: z.string().min(1).max(1000),
 });
 
@@ -32,7 +32,7 @@ export default function CreateRoomPage() {
     defaultValues: {
       name: "",
       description: "",
-      language: "",
+      tags: "",
       githubRepo: "",
     },
   });
@@ -80,7 +80,7 @@ export default function CreateRoomPage() {
         />
         <FormField
           control={form.control}
-          name="language"
+          name="tags"
           render={({ field }) => (
             <FormItem>
               <FormLabel>Tags</FormLabel>

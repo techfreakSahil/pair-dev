@@ -32,16 +32,16 @@ function AccountInfo() {
       <DropdownMenuContent>
         <DropdownMenuLabel>My Account</DropdownMenuLabel>
         <DropdownMenuSeparator />
-        {session?.data ? (
-          <DropdownMenuItem onClick={() => signOut()}>
-            <LogOut className="mr-2" /> Sign out
-          </DropdownMenuItem>
-        ) : (
-          <DropdownMenuItem onClick={() => signIn("google")}>
-            <LogIn className="mr-2" />
-            Sign in
-          </DropdownMenuItem>
-        )}
+
+        <DropdownMenuItem
+          onClick={() =>
+            signOut({
+              callbackUrl: "/",
+            })
+          }
+        >
+          <LogOut className="mr-2" /> Sign out
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );
@@ -55,6 +55,13 @@ export function Header() {
       <div className="flex justify-between items-center">
         <Link href="/">LOGO</Link>
         <div className="flex items-center gap-4">
+          {session.data && <AccountInfo />}
+          {!session.data && (
+            <Button onClick={() => signIn("google")}>
+              <LogIn className="mr-2" />
+              Sign in
+            </Button>
+          )}
           <AccountInfo />
           <ModeToggle />
         </div>
