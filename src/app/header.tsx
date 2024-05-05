@@ -51,13 +51,21 @@ export function Header() {
   const session = useSession();
 
   return (
-    <header className="py-3 bg-gray-200 container mx-auto dark:bg-gray-900">
+    <header className="py-3 bg-gray-200 container mx-auto dark:bg-gray-900 z-[9999]">
       <div className="flex justify-between items-center">
         <Link href="/">LOGO</Link>
-        <nav>
-          <Button asChild>
-            <Link href="/your-rooms">Your Rooms</Link>
-          </Button>
+        <nav className="flex gap-3">
+          {session.data && (
+            <>
+              <Button asChild>
+                <Link href="/browse">Browse</Link>
+              </Button>
+
+              <Button asChild>
+                <Link href="/your-rooms">Your Rooms</Link>
+              </Button>
+            </>
+          )}
         </nav>
         <div className="flex items-center gap-4">
           {session.data && <AccountInfo />}
