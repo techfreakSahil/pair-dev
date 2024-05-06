@@ -21,7 +21,7 @@ import {
 
 import Link from "next/link";
 import { Room } from "@/db/schema";
-import { GithubIcon, Trash2Icon } from "lucide-react";
+import { GithubIcon, PenBoxIcon, Trash2Icon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { TagList } from "@/components/tags-list";
 import { splitTags } from "@/lib/utils";
@@ -29,7 +29,12 @@ import { deleteRoomAction } from "./action";
 export function UserRoomCard({ room }: { room: Room }) {
   return (
     <Card>
-      <CardHeader>
+      <CardHeader className="relative">
+        <Button size="icon" className="absolute top-1 right-1">
+          <Link href={`/edit-room/${room.id}`}>
+            <PenBoxIcon />
+          </Link>
+        </Button>
         <CardTitle>{room.name}</CardTitle>
         <CardDescription>{room.description}</CardDescription>
       </CardHeader>
