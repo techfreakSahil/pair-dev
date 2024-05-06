@@ -14,6 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { useToast } from "@/components/ui/use-toast";
 import { useParams, useRouter } from "next/navigation";
 import { editRoomAction } from "./actions";
 import { Room } from "@/db/schema";
@@ -27,6 +28,7 @@ const formSchema = z.object({
 
 export default function EditRoomForm({ room }: { room: Room }) {
   const params = useParams();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,6 +44,11 @@ export default function EditRoomForm({ room }: { room: Room }) {
     await editRoomAction({
       id: params.roomId as string,
       ...values,
+    });
+    toast({
+      title: "Successfull!",
+      description: "Your custom room has been edited",
+      position: "top",
     });
   }
   return (

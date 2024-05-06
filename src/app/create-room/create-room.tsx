@@ -14,7 +14,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { create } from "domain";
+import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { createRoomAction } from "./actions";
 
@@ -27,6 +27,7 @@ const formSchema = z.object({
 
 export default function CreateRoomPage() {
   const router = useRouter();
+  const { toast } = useToast();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -40,6 +41,11 @@ export default function CreateRoomPage() {
   async function onSubmit(values: z.infer<typeof formSchema>) {
     //Invoke a server action and store the data on the database
     await createRoomAction(values);
+    toast({
+      title: "Successfull!",
+      description: "Your custom room has been created",
+      position: "top",
+    });
     router.push("/");
   }
   return (

@@ -1,8 +1,6 @@
 "use server";
 
-import { db } from "@/db";
 import { deleteRoom, getRoom } from "@/services/room";
-import { eq } from "drizzle-orm";
 import { getSession } from "next-auth/react";
 import { revalidatePath } from "next/cache";
 
@@ -16,5 +14,6 @@ export async function deleteRoomAction(roomId: string) {
     throw new Error("User not authorized");
   }
   await deleteRoom(roomId);
+
   revalidatePath("/your-rooms");
 }
