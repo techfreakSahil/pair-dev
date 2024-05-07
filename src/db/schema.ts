@@ -7,14 +7,8 @@ import {
   integer,
   uuid,
 } from "drizzle-orm/pg-core";
-import type { AdapterAccount } from "@auth/core/adapters";
 import { randomUUID } from "crypto";
 import { sql } from "drizzle-orm";
-
-export const testing = pgTable("testing", {
-  id: text("id").notNull().primaryKey(),
-  name: text("name"),
-});
 
 export const users = pgTable("user", {
   id: text("id")
