@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { getRooms } from "@/services/room";
 import { Searchbar } from "./search-bar";
+import Image from "next/image";
 import { RoomCard } from "@/app/browse/room-card";
 
 export default async function Home({
@@ -27,6 +28,19 @@ export default async function Home({
         {rooms.map((room) => {
           return <RoomCard key={room.id} room={room} />;
         })}
+        {rooms.length === 0 && (
+          <div className="flex flex-col mt-20 gap-6">
+            <Image
+              src="/no-data.svg"
+              alt="no room data"
+              width="150"
+              height="150"
+            />
+            <Button>
+              <Link href="/create-room">Create Room</Link>
+            </Button>
+          </div>
+        )}
       </div>
     </main>
   );
