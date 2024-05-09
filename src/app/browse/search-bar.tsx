@@ -27,12 +27,16 @@ export function Searchbar() {
       search: query.get("search") ?? "",
     },
   });
+  const search = query.get("search");
   useEffect(() => {
-    form.setValue("search", query.get("search") ?? "");
-  }, [query.get("search"), form]);
+    form.setValue("search", search ?? "");
+  }, [search, form]);
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    if (values.search) router.push(`/search?=${values.search}`);
-    else router.push("/");
+    if (values.search) {
+      router.push(`/browse?search=${values.search}`);
+    } else {
+      router.push("/browse");
+    }
   }
   return (
     <Form {...form}>

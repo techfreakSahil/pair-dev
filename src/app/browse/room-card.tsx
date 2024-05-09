@@ -35,7 +35,7 @@ export function RoomCard({ room }: { room: Room }) {
       </CardContent>
       <CardFooter>
         <Button asChild>
-          <Link href={`/room/${room.id}`}>Join Room</Link>
+          <Link href={`/rooms/${room.id}`}>Join Room</Link>
         </Button>
       </CardFooter>
     </Card>

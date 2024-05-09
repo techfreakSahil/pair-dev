@@ -5,10 +5,13 @@ import Link from "next/link";
 import { TagList } from "@/components/tags-list";
 import { PairDev } from "./video-player";
 import { splitTags } from "@/lib/utils";
+import { unstable_noStore } from "next/cache";
 
 export default async function RoomPage(props: { params: { roomId: string } }) {
+  unstable_noStore();
   const roomId = props.params.roomId;
   const room = await getRoom(roomId);
+  console.log("room aya");
 
   if (!room) {
     return <div>No rooom found for {roomId}</div>;
@@ -23,7 +26,7 @@ export default async function RoomPage(props: { params: { roomId: string } }) {
         </div>
       </div>
       <div className="col-span-1 p-4 pl-2">
-        <div className="rounded-xl border bg-card text-card-foreground shadow p-5">
+        <div className="rounded-xl border bg-card flex flex-col gap-3 text-card-foreground shadow p-5">
           <h1 className="text-base leading-none tracking-tight">
             {room?.name}
           </h1>

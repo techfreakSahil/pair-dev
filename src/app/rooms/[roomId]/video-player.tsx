@@ -16,22 +16,21 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import { generateTokenAction } from "./action";
 import { useRouter } from "next/navigation";
-import { error } from "console";
 
 const apiKey = process.env.NEXT_STREAM_API_KEY!;
-const userId = "user-id";
-const token = "authentication-token";
 
 export function PairDev({ room }: { room: Room }) {
   const session = useSession();
   const router = useRouter();
-  if (!session.data) return;
-  const userId = session.data.user.id;
-  const [client, setClient] = useState<StreamVideoClient | null>(null);
-  const [call, setCall] = useState<Call | null>(null);
+  const [client, setClient] = useState<StreamVideoClient>();
+  const [call, setCall] = useState<Call>();
 
   useEffect(() => {
     if (!room) return;
+    if (!session.data) {
+      return;
+    }
+    const userId = session.data.user.id;
     const client = new StreamVideoClient({
       apiKey,
       user: {
@@ -41,22 +40,18 @@ export function PairDev({ room }: { room: Room }) {
       },
       tokenProvider: () => generateTokenAction(),
     });
-    setClient(client);
     const call = client.call("default", room.id);
     call.join({ create: true });
-
+    setClient(client);
     setCall(call);
 
     return () => {
       call
         .leave()
-        .then(() => {
-          client.disconnectUser();
-        })
-        .catch(() => console.log(error));
+        .then(() => client.disconnectUser())
+        .catch(console.error);
     };
   }, [session, room]);
-
   return (
     client &&
     call && (

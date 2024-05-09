@@ -1,6 +1,6 @@
 "use server";
 
-import { getSession } from "next-auth/react";
+import { getSession } from "@/lib/auth";
 import { StreamChat } from "stream-chat";
 
 export async function generateTokenAction() {
@@ -13,6 +13,5 @@ export async function generateTokenAction() {
 
   const serverClient = StreamChat.getInstance(api_key, api_secret);
   const token = serverClient.createToken(session.user.id);
-
   return token;
 }

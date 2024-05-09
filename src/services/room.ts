@@ -14,7 +14,6 @@ export async function getRooms(search: string | undefined) {
 }
 
 export async function getRoom(roomId: string) {
-  unstable_noStore();
   return await db.query.room.findFirst({
     where: eq(room.id, roomId),
   });
@@ -28,7 +27,7 @@ export async function getUserRooms() {
   }
 
   const rooms = await db.query.room.findMany({
-    where: eq(room.id, session.user.id),
+    where: eq(room.userId, session.user.id),
   });
   return rooms;
 }

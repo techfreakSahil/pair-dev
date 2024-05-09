@@ -51,9 +51,9 @@ export function UserRoomCard({ room }: { room: Room }) {
           </Link>
         )}
       </CardContent>
-      <CardFooter>
+      <CardFooter className="flex gap-3">
         <Button asChild>
-          <Link href={`/room/${room.id}`}>Join Room</Link>
+          <Link href={`/rooms/${room.id}`}>Join Room</Link>
         </Button>
         <AlertDialog>
           <AlertDialogTrigger>

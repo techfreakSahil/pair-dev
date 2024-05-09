@@ -29,7 +29,7 @@ export default async function Home({
           return <RoomCard key={room.id} room={room} />;
         })}
         {rooms.length === 0 && (
-          <div className="flex flex-col mt-20 gap-6">
+          <div className="flex flex-col justfiy-center items-center mt-20 gap-6">
             <Image
               src="/no-data.svg"
               alt="no room data"
