@@ -126,7 +126,7 @@ export function Header() {
         <div className="flex items-center gap-4">
           {isLoggedIn && <AccountInfo />}
           {!isLoggedIn && (
-            <Button onClick={() => signIn()} variant="link">
+            <Button onClick={() => signIn("google")} variant="link">
               <LogInIcon className="mr-2" /> Sign In
             </Button>
           )}

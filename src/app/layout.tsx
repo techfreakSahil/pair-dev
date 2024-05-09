@@ -6,6 +6,7 @@ import { SessionProvider } from "next-auth/react";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Providers } from "./provider";
 import { Header } from "./header";
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,11 +23,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        {" "}
         <Providers>
+          <Toaster />
           <Header />
-
-          {children}
+          <div className="container mx-auto">{children}</div>
         </Providers>
       </body>
     </html>
